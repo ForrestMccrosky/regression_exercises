@@ -47,5 +47,37 @@ def wrangle_telco():
     df.total_charges = df.total_charges.str.replace(' ', '0').astype(float)
 
     df = df.reset_index()
+    
+    df = df.drop(columns = 'index')
 
+    return df
+
+#############################Return a cleaned Zillow Dataframe##############################
+
+def wrangle_zillow():
+    '''
+    This function is going to acquire the neccessary columns bedroomcnt, bathroomcnt, 
+    calculatedfinishedsquarefeet, taxvaluedollorcnt, yearbuilt, taxamount, and fips from
+    the zillow databse in SQL and move it into a pandas dataframe while
+    filtering for Single Family Residential properties
+    
+    The function will then clean the null values by dropping them because the percentage
+    of rows with null values was very small compared to the 2.15 million rows of the dataframe
+    '''
+
+    sql_query = '''
+    select bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet, taxvaluedollarcnt, yearbuilt,    
+    taxamount, fips
+    from properties_2017
+    where propertylandusetypeid = 261;
+    '''
+    
+    df = pd.read_sql(sql_query, sql_connect('zillow'))
+    
+    df = df.dropna()
+    
+    df = df.reset_index()
+    
+    df = df.drop(columns = 'index')
+    
     return df
