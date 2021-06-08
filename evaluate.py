@@ -61,11 +61,13 @@ def regression_errors(df, y, yhat):
     print(f'''
     Regression Model Error
     
-    Sum of Squared Errors / sse: {sse}
-    Explained Sum of Squares / ess: {ess}
-    Total Sum of Squares / tss: {tss}
-    Mean of Squared Errors / mse: {mse}
-    Root Mean of Squared Errors / rmse: {rmse}
+    | Metric                       | Model Value |
+    |------------------------------|-------------|
+    | Sum of Squared Errors     SSE| {sse:.5f}   
+    | Explained Sum of Squares  ESS| {ess:.5f}   
+    | Total Sum of Squares      TSS| {tss:.5f}   
+    | Mean Squared Error        MSE| {mse:.5f}     
+    | Root Mean Squared Error  RMSE| {rmse:.5f}     
     
     ''')
     
@@ -83,7 +85,17 @@ def baseline_mean_errors(df):
     mse_baseline = sse_baseline / n
     rmse_baseline = math.sqrt(mse_baseline)
 
-    print(f'Baseline scores --> sse: {sse_baseline} mse: {mse_baseline} rmse: {rmse_baseline}')
+    print(f'''
+    Regression Baseline Error
+    
+    | Metric                           | Baseline Error      |
+    |----------------------------------|---------------------|
+    | Sum Squared Errors            SSE| {sse_baseline:.5f}  
+    | Mean of Squared Errors        MSE| {mse_baseline:.5f}  
+    | Root Mean of Squared Errors  RSME| {rmse_baseline:.5f} 
+
+    
+    ''')
 
 ################### Better than the Baseline?? ####################
 
