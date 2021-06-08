@@ -88,7 +88,7 @@ def baseline_mean_errors(df):
     print(f'''
     Regression Baseline Error
     
-    | Metric                           | Baseline Error      |
+    | Metric                           | Baseline Value      |
     |----------------------------------|---------------------|
     | Sum Squared Errors            SSE| {sse_baseline:.5f}  
     | Mean of Squared Errors        MSE| {mse_baseline:.5f}  
