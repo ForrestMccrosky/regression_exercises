@@ -7,6 +7,7 @@ from pydataset import data
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.feature_selection import SelectKBest, f_regression, RFE
 
 
 ###################Function File for Evaluating Regression Model ####################
@@ -124,6 +125,38 @@ def better_than_the_baseline(df):
         return True
     else:
         return False
+    
+################### Recursive Feature Elimination feature select ####################
+   
+    
+def rfe(x, y, n):
+    '''
+    This function uses the recursive feature elimination method to predict
+    the best features for predicting a target variable for a Regression model
+    by taking in X_train and y_train and number of features wanted to select
+    '''
+    lm = LinearRegression()
+    rfe = RFE(estimator=lm, n_features_to_select = n)
+    rfe.fit(x, y)
+    
+    return x.columns[rfe.support_]
+
+################### SelectKbest feature select ####################
+
+
+def select_kbest(x, y, n):
+    '''
+    This function is a tool that uses the SelectKBest method to pull down 
+    the best features to predict a target variable from the features 
+    in a dataframe
+    '''
+    f_selector = SelectKBest(score_func=f_regression, k=n)
+    f_selector.fit(x, y)
+    
+    mask = f_selector.get_support()
+    return x.columns[mask]
+    
+    
 
 
     
